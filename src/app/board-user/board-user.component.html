@@ -1,0 +1,81 @@
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+<div class="stat" *ngIf="currentUser;else loggedOut">
+    <div class="row justify-content-center">
+        <div class="col-xl-3 col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="float-right">
+                        <i class=" icon fa fa-archive  h4 ml-3"></i>
+                    </div>
+                    <h5 class="desc">1</h5>
+                    <p class="text-muted mb-0">Constats deja traites</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+            <div class="card  ">
+                <div class="card-body">
+                    <div class="float-right">
+                        <i class="icon fa fa-file h4 ml-3"></i>
+                    </div>
+                    <h5 class="desc">1</h5>
+                    <p class="text-muted mb-0">Constats en cours de traitement</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<section class="container pt-3 mb-3">
+    <div class="row pt-5 mt-30">
+        <div class="col-lg-4 col-sm-6 mb-30 pb-5">
+            <div class="card" routerLink="profile">
+                <div class="box-shadow bg-white rounded-circle mx-auto text-center" style="width: 90px; height: 90px; margin-top: -45px;"><i class=" icon fa fa-user-circle-o fa-3x head-icon"></i></div>
+                <div class="card-body text-center">
+                    <h3 class="card-title pt-1">Profile Settings</h3>
+                    <p class="card-text text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p><span class="text-sm text-uppercase font-weight-bold"><a routerLink="/profile">Learn More&nbsp;<i class="fe-icon-arrow-right"></i></a></span>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-sm-6 mb-30 pb-5">
+            <div class="card" routerLink="profile">
+                <div class="box-shadow bg-white rounded-circle mx-auto text-center" style="width: 90px; height: 90px; margin-top: -45px;"><i class="icon fa fa-address-book fa-3x head-icon"></i></div>
+                <div class="card-body text-center">
+                    <h3 class="card-title pt-1">Voir Historiques Constat</h3>
+                    <p class="card-text text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p><span class="text-sm text-uppercase font-weight-bold"><a routerLink="/historic">Learn More&nbsp;<i class="fe-icon-arrow-right"></i></a></span>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-sm-6 mb-30 pb-5">
+            <div class="card" routerLink="profile">
+                <div class="box-shadow bg-white rounded-circle mx-auto text-center" style="width: 90px; height: 90px; margin-top: -45px;"><i class="icon fa fa-car fa-3x head-icon"></i></div>
+                <div class="card-body text-center">
+                    <h3 class="card-title pt-1">Envoyer constat amiable</h3>
+                    <p class="card-text text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p><span class="text-sm text-uppercase font-weight-bold"><a routerLink="/constat">Learn More&nbsp;<i class="fe-icon-arrow-right"></i></a></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<ng-template #loggedOut>
+    Please login.
+  </ng-template> 
+  <!-- <div class="col-lg-4 col-sm-6 mb-30 pb-5">
+    <div class="card" routerLink="">
+        <div class="box-shadow bg-white rounded-circle mx-auto text-center" style="width: 90px; height: 90px; margin-top: -45px;"><i class="fa fa-address-book fa-3x head-icon"></i></div>
+        <div class="card-body text-center">
+            <h3 class="card-title pt-1">Voir historique constat</h3>
+            <p class="card-text text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p><span class="text-sm text-uppercase font-weight-bold"><a routerLink="/historic"> Learn More&nbsp;<i class="fe-icon-arrow-right"></i></a></span>
+        </div>
+    </div>
+</div>
+<div class="col-lg-4 col-sm-6 mb-30 pb-5">
+    <div class="card" routerLink="">
+        <div class="box-shadow bg-white rounded-circle mx-auto text-center" style="width: 90px; height: 90px; margin-top: -45px;"><i class="fa fa-car fa-3x head-icon"></i></div>
+        <div class="card-body text-center">
+            <h3 class="card-title pt-1">Envoyer un constat amiable</h3>
+            <p class="card-text text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p><span class="text-sm text-uppercase font-weight-bold"><a routerLink="/constat">Learn More&nbsp;<i class="fe-icon-arrow-right"></i></a></span>
+        </div>
+    </div>
+</div> -->

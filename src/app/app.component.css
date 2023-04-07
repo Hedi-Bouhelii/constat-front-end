@@ -1,0 +1,35 @@
+.navbar{
+    height: 75px;
+    background-color: #00203f !important;
+}
+.container-fluid{
+    margin-left: -15px;
+}
+.shape::after{
+    content: '';
+    position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom,#00203f,#ADF0D1 );
+
+  }
+img{
+    width: 100px;
+    height: 50px;
+}
+button{
+    background-color: #f44336;
+    border-radius: 5px;
+    color: white;
+    width: 100px;
+    height: 35px;
+    border: none;
+    transition: outline 0.5s ease;
+}
+button:active{
+outline: 0.5px solid rgb(222, 154, 154)
+}
+.profile{
+    position: relative;
+    top: 5px;
+}

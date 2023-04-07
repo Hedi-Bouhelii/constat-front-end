@@ -1,0 +1,126 @@
+<h2 mat-dialog-title>Constat Amiable Num :5</h2>
+<mat-dialog-content>
+ <form >
+    <h2>Details D'accident</h2>
+        <mat-divider></mat-divider>
+    <section>
+        <div>
+            <mat-form-field>
+                <mat-label>date</mat-label>
+                <input type="text" matInput value="25/05/2023" readonly="true">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>heure</mat-label>
+                <input type="text" matInput value="12:23" readonly="true">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>lieu</mat-label>
+                <input type="text" matInput value="Rades,Cite Monji Slim" readonly="true">
+            </mat-form-field>
+            <mat-label>Blesses</mat-label>
+            <mat-checkbox checked="true" disabled="true" > <span> Oui</span></mat-checkbox><br>
+            <mat-label>Degats Materiaux</mat-label>
+            <mat-checkbox checked="true" disabled="true" > <span> Oui</span></mat-checkbox>
+        </div>
+    </section>
+    <h2>Temoins</h2>
+        <mat-divider></mat-divider>
+    <section> 
+        <div>
+            <mat-form-field>
+                <mat-label>  Nom</mat-label>
+                <input type="text" matInput value="razi" readonly="true">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>  Prenom</mat-label>
+                <input type="text" matInput value="fouleni" readonly="true">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>  Adresse</mat-label>
+                <input type="text" matInput value="ben arous cite sidi bachir" readonly="true">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Temoins Tel</mat-label>
+                <input type="text" matInput value="12345678" readonly="true">
+            </mat-form-field>
+        </div>
+    </section>
+    <h2>Conducteur et assure</h2>
+        <mat-divider></mat-divider>
+    <section >
+        <div>
+            <mat-form-field>
+                <mat-label>Nom </mat-label>
+                <input type="text" matInput value="aziz" readonly="true">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Prenom </mat-label>
+                <input type="text" matInput value="dalteni" readonly="true">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Adresse </mat-label>
+                <input type="text" matInput value="Manouba,hbib thameur" readonly="true">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Num Permis </mat-label>
+                <input type="text" matInput value="85749632" readonly="true">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Date Permis </mat-label>
+                <input type="text" matInput value="12/05/2019" readonly="true">
+            </mat-form-field>
+            <h2>assure </h2>
+            <mat-divider></mat-divider>
+            <mat-form-field>
+                <mat-label>Nom </mat-label>
+                <input type="text" matInput value="hedi" readonly="true">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Prenom </mat-label>
+                <input type="text" matInput value="bouheli" readonly="true">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Adresse </mat-label>
+                <input type="text" matInput value="mohamdia,ben arous" readonly="true">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Tel </mat-label>
+                <input type="text" matInput value="74142563" readonly="true">
+            </mat-form-field>
+        </div>
+    </section>
+    <h2>Vehicule</h2>
+        <mat-divider></mat-divider>
+    <section>
+        <div>
+            <mat-form-field>
+                <mat-label>Marque </mat-label>
+                <input type="text" matInput value="Toyota" readonly="true">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Type </mat-label>
+                <input type="text" matInput value="camionette" readonly="true">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Num Matricule </mat-label>
+                <input type="text" matInput value="216" readonly="true">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Venant de  </mat-label>
+                <input type="text" matInput value="rades" readonly="true">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Allant vers  </mat-label>
+                <input type="text" matInput value="mohamedia" readonly="true">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Degats Apparants</mat-label>
+                <input type="text" matInput value="droit" readonly="true">
+            </mat-form-field>
+        </div>
+    </section>
+    
+ </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="true">Close</button>
