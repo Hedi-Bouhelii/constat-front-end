@@ -12,7 +12,7 @@
         <a  class="nav-link" routerLink="mod">Moderator Board</a>
       </li>
       <li class="nav-item">
-        <a  class="nav-link" *ngIf="isLoggedIn" routerLink="user">User</a>
+        <a  class="nav-link" routerLink="user">User</a>
       </li>
     </ul>
 
@@ -30,7 +30,7 @@
         <a  class=" profile nav-link" routerLink="profile">{{ username }}</a>
       </li>
       <li class="nav-item">
-        <a href class="nav-link" (click)="logout()"><button  >Déconnecter</button></a>
+        <a href class="nav-link" (click)="logout()"><button>Déconnecter</button></a>
       </li>
     </ul>
   </nav>

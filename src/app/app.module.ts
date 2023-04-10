@@ -13,11 +13,10 @@ import { BoardModeratorComponent } from './board-moderator/board-moderator.compo
 import { BoardUserComponent } from './board-user/board-user.component';
 import { ConstatFormComponent } from './constat-form/constat-form.component';
 import { HistoricConstatComponent } from './historic-constat/historic-constat.component';
-import { TestingComponent } from './testing/testing.component';
 import { ConstatPDFComponent } from './constat-pdf/constat-pdf.component'
 
 
-import { httpInterceptorProviders } from './_helpers/auth.interceptor';
+import { httpInterceptorProviders } from './_helpers/http.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule} from '@angular/material/button';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -48,10 +47,8 @@ import {MatDividerModule} from '@angular/material/divider'
     BoardModeratorComponent,
     BoardUserComponent,
     ConstatFormComponent,
-    HistoricConstatComponent,
-    TestingComponent,
-    ConstatPDFComponent
-    
+    ConstatPDFComponent,
+    HistoricConstatComponent
   ],
   imports: [
     BrowserModule,
@@ -75,7 +72,8 @@ import {MatDividerModule} from '@angular/material/divider'
     MatAutocompleteModule,
     MatSelectModule,
     MatDialogModule,
-    MatDividerModule
+    MatDividerModule,
+    MatSliderModule
   ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]

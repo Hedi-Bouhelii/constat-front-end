@@ -1,6 +1,6 @@
  
   
-<mat-stepper orientation="vertical"  #stepper>
+<mat-stepper orientation="vertical"   #stepper>
     <mat-step [stepControl]="Accident">
         <form  [formGroup]="Accident">
             <ng-template matStepLabel>Accident</ng-template>
@@ -16,23 +16,23 @@
 
             <mat-form-field  >
                 <mat-label>Lieu</mat-label>
-                <input formControlName="lieu" matInput placeholder="Ex. Rue monji slim 1145 Ben Arous">
-                <mat-error *ngIf="Accident.controls['lieu'].errors?.['required']" >Champ obligatoire</mat-error>
+                <input formControlName="place" matInput placeholder="Ex. Rue monji slim 1145 Ben Arous">
+                <mat-error *ngIf="Accident.controls['place'].errors?.['required']" >Champ obligatoire</mat-error>
             </mat-form-field>
 
-            <mat-radio-group formControlName="Blessure" aria-label="Select an option">
+            <mat-radio-group formControlName="injuries" aria-label="Select an option">
                 <mat-label>Blessés</mat-label>
-                <mat-radio-button  value="1">Non</mat-radio-button>
-                <mat-radio-button  value="2">Oui</mat-radio-button>
+                <mat-radio-button  value="no injuries">Non</mat-radio-button>
+                <mat-radio-button  value="material damage">Oui</mat-radio-button>
             </mat-radio-group>
-            <mat-error *ngIf="Accident.controls['Blessure'].errors?.['required']">Veuillez sélectionner une option pour indiquer s'il y a eu des blessures ou non lors de l'accident.</mat-error>
+            <mat-error *ngIf="Accident.controls['injuries'].errors?.['required']">Veuillez sélectionner une option pour indiquer s'il y a eu des blessures ou non lors de l'accident.</mat-error>
 
-            <mat-radio-group formControlName="Degats" aria-label="Select an option">
+            <mat-radio-group formControlName="materialDamage" aria-label="Select an option">
                 <mat-label>Degats Materiaux</mat-label>
-                <mat-radio-button value="3">Oui</mat-radio-button>
-                <mat-radio-button value="4">Non</mat-radio-button>
+                <mat-radio-button value="no material damage">Oui</mat-radio-button>
+                <mat-radio-button value="material damage">Non</mat-radio-button>
             </mat-radio-group>
-            <mat-error *ngIf="Accident.controls['Degats'].errors?.['required']">Veuillez sélectionner une option pour indiquer s'il y a eu des degats ou non lors de l'accident.</mat-error>
+            <mat-error *ngIf="Accident.controls['materialDamage'].errors?.['required']">Veuillez sélectionner une option pour indiquer s'il y a eu des degats ou non lors de l'accident.</mat-error>
             <button mat-button   (click)="toggleExpansion()">Toggle Expansion Panel</button>
                 <mat-expansion-panel #myPanel [expanded]="isExpansionPanelOpen" [disabled]="!isExpansionPanelOpen">
                     <mat-expansion-panel-header>
@@ -41,27 +41,21 @@
                     <form  [formGroup]="Optional">
                         <mat-form-field >
                             <mat-label>Nom</mat-label>
-                            <input formControlName="nom"  matInput placeholder="Ex. Pizza" >
-                            <mat-error *ngIf="Optional.controls['nom'].invalid && Optional.controls['nom'].touched" >champ obligatire</mat-error>
+                            <input formControlName="witnessFullName"  matInput placeholder="Ex. Pizza" >
+                            <mat-error *ngIf="Optional.controls['witnessFullName'].invalid && Optional.controls['witnessFullName'].touched" >champ obligatire</mat-error>
                         </mat-form-field>
     
                         <mat-form-field >
-                            <mat-label>Prénom</mat-label>
-                            <input formControlName="prenom"  matInput placeholder="Ex. Rue monji slim 1145 Ben Arous" >
-                            <mat-error *ngIf="Optional.controls['prenom'].invalid && Optional.controls['prenom'].touched" >champ obligatire</mat-error>
-                        </mat-form-field>
-    
-                        <mat-form-field >
-                            <mat-label>Age</mat-label>
-                            <input formControlName="age" 
-                             matInput type="number" >
-                            <mat-error *ngIf="Optional.controls['age'].invalid && Optional.controls['age'].touched" >champ obligatire</mat-error>
+                            <mat-label>adresse</mat-label>
+                            <input formControlName="witnessAddress" 
+                            matInput type="number" >
+                            <mat-error *ngIf="Optional.controls['witnessAddress'].invalid && Optional.controls['witnessAddress'].touched" >champ obligatire</mat-error>
                         </mat-form-field>
     
                         <mat-form-field  >
-                            <mat-label>Adresse</mat-label>
-                            <input formControlName="adrs" matInput placeholder="Ex. Pizza" >
-                            <mat-error *ngIf="Optional.controls['adrs'].invalid && Optional.controls['adrs'].touched" >champ obligatire</mat-error>
+                            <mat-label>Tel</mat-label>
+                            <input formControlName="witnessPhone" matInput placeholder="Ex. Pizza" >
+                            <mat-error *ngIf="Optional.controls['witnessPhone'].invalid && Optional.controls['witnessPhone'].touched" >champ obligatire</mat-error>
 
                         </mat-form-field>
                     </form>
@@ -71,155 +65,239 @@
             </div>
         </form>
     </mat-step>
-    <mat-step [stepControl]="assureeConducteur">
-        <form  [formGroup]="assureeConducteur">
-        <ng-template matStepLabel>Conducteur et Assure</ng-template>
-        <div class="cards">
-            <mat-card class="example-card">
-                <mat-card-header>
-                    <mat-card-title>Assuré</mat-card-title>
-                </mat-card-header>
-                <mat-card-content>
-                    <div class="part1">
-                        <mat-form-field>
-                            <mat-label>Nom</mat-label>
-                            <input matInput formControlName="nom">
-                        </mat-form-field>
-    
-                        <mat-form-field>
-                            <mat-label>Prénom</mat-label>
-                            <input matInput formControlName="prenom">
-                        </mat-form-field>
-    
-                        <mat-form-field>
-                            <mat-label>Adresse</mat-label>
-                            <input matInput formControlName="adr" placeholder="EXP .1145 ben arous rue liberte ">
-                        </mat-form-field>
-    
-                        <mat-form-field>
-                            <mat-label>Tél</mat-label>
-                            <input matInput formControlName="tel" placeholder="+216">
-                        </mat-form-field>
-                        <mat-checkbox color="primary" #chkEnable ngModel (change)="disableField(chkEnable.checked)" formControlName="driverIsInsured">Assuré est le Conducteur</mat-checkbox>
+     <mat-step [stepControl]="assureeConducteur">
+        <div class="assureeConducteur">
+            <form  [formGroup]="assureeConducteur">
+            <ng-template matStepLabel>Conducteur et Assure</ng-template>
+            <div class="cards">
+                <mat-card class="assure">
+                    <mat-card-header>
+                        <mat-card-title>Assuré</mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <div class="part1">
+                            <mat-form-field>
+                                <mat-label>Nom</mat-label>
+                                <input matInput formControlName="insuredLastName">
+                            </mat-form-field>
+                            <mat-form-field>
+                                <mat-label>Prénom</mat-label>
+                                <input matInput formControlName="insuredFirstName">
+                            </mat-form-field>
+                        </div>
+                            <mat-form-field>
+                                <mat-label>Adresse</mat-label>
+                                <input matInput formControlName="insuredAddress" placeholder="EXP .1145 ben arous rue liberte ">
+                            </mat-form-field>
+        
+                            <mat-form-field>
+                                <mat-label>Tél</mat-label>
+                                <input matInput formControlName="insuredPhone" placeholder="+216">
+                            </mat-form-field>
+                            <mat-checkbox color="primary" #chkEnable ngModel (change)="disableField(chkEnable.checked)" formControlName="driverIsInsured">Assuré est le Conducteur</mat-checkbox>
+                            <div>
+                                <mat-form-field >
+                                    <mat-label>Num Permis</mat-label>
+                                    <input [disabled]="!assureeConducteur.get('work')?.value"  matInput formControlName="insuredLicenceNumber" placeholder="+216">
+                                </mat-form-field> 
+            
+                                <mat-form-field >
+                                    <mat-label>Date de Permis</mat-label>
+                                    <input [disabled]="!assureeConducteur.get('work')?.value" matInput formControlName="insuredLicenceDate" placeholder="+216">
+                                </mat-form-field>
+                            </div>
                         
-                        <mat-form-field >
-                            <mat-label>Num Permis</mat-label>
-                            <input [disabled]="!assureeConducteur.get('work')?.value"  matInput formControlName="numPA" placeholder="+216">
-                        </mat-form-field> 
-    
-                        <mat-form-field >
-                            <mat-label>Date de Permis</mat-label>
-                            <input [disabled]="!assureeConducteur.get('work')?.value" matInput formControlName="datePA" placeholder="+216">
-                        </mat-form-field>
-     
-                    </div>
-                </mat-card-content>
-                
-            </mat-card>
+                    </mat-card-content>
+                </mat-card>
 
-            <mat-card class="example-card">
-                <mat-card-header>
-                    <mat-card-title>Conducteur</mat-card-title>
-                </mat-card-header>
-                <mat-card-content>
-                    <div class="part2" >
-                        <mat-form-field>
-                            <mat-label>Nom Conducteur</mat-label>
-                            <input [disabled]="assureeConducteur.get('work')?.value" type="text" formControlName="nomCon" matInput>
-                        </mat-form-field>
+                <mat-card class="conducteur">
+                    <mat-card-header>
+                        <mat-card-title>Conducteur</mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <div class="part2" >
+                            <mat-form-field>
+                                <mat-label>Nom Conducteur</mat-label>
+                                <input [disabled]="assureeConducteur.get('work')?.value" type="text" formControlName="driverLastName" matInput>
+                            </mat-form-field>
 
-                        <mat-form-field>
-                            <mat-label>Prénom Conducteur</mat-label>
-                            <input type="text" formControlName="preCon" matInput>
-                        </mat-form-field>
+                            <mat-form-field>
+                                <mat-label>Prénom Conducteur</mat-label>
+                                <input type="text" formControlName="driverFirstName" matInput>
+                            </mat-form-field>
 
-                        <mat-form-field>
-                            <mat-label>Tél</mat-label>
-                            <input matInput formControlName="telCon" placeholder="+216">
-                        </mat-form-field>
+                            <mat-form-field>
+                                <mat-label>Adresse</mat-label>
+                                <input matInput formControlName="driverAddress" placeholder="EXP .1145 ben arous rue liberte ">
+                            </mat-form-field>
 
-                        <mat-form-field>
-                            <mat-label>Adresse</mat-label>
-                            <input matInput formControlName="adrCon" placeholder="EXP .1145 ben arous rue liberte ">
-                        </mat-form-field>
-
-                        <mat-form-field >
-                            <mat-label>Num Permis</mat-label>
-                            <input  matInput formControlName="numPC" placeholder="+216">
-                        </mat-form-field> 
-    
-                        <mat-form-field >
-                            <mat-label>Date de Permis</mat-label>
-                            <input matInput formControlName="datePC" placeholder="+216">
-                        </mat-form-field>
-                    </div>
-                </mat-card-content>
-                
-            </mat-card> 
+                            <mat-form-field >
+                                <mat-label>Num Permis</mat-label>
+                                <input  matInput formControlName="licenceNumber" placeholder="+216">
+                            </mat-form-field> 
+        
+                            <mat-form-field >
+                                <mat-label>Date de Permis</mat-label>
+                                <input matInput formControlName="licenceDate" placeholder="+216">
+                            </mat-form-field>
+                        </div>
+                    </mat-card-content>         
+                </mat-card> 
+            </div>
+            <div>
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-button matStepperNext>Next</button>
+            </div>
+            </form>
         </div>
-        <div>
-            <button mat-button matStepperPrevious>Back</button>
-            <button mat-button matStepperNext>Next</button>
-        </div>
-        </form>
     </mat-step>
-
 
     <mat-step [stepControl]="vehicule">
         <form  [formGroup]="vehicule">
-        <ng-template matStepLabel>Vehicule</ng-template>
-        <mat-card>
-            <mat-card-header>
-                <mat-card-title>Vehicule Informations</mat-card-title>
-            </mat-card-header>
-            <mat-card-content>
-                <div class="markType">
-                    <mat-form-field class="example-full-width" appearance="fill">
-                        <mat-label>Number</mat-label>
-                        <input type="text"
-                            placeholder="Pick one"
-                            aria-label="Number"
-                            matInput
-                            formControlName="marque"
-                            [matAutocomplete]="auto">
-                        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-                            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-                                {{option}}
-                            </mat-option>
-                        </mat-autocomplete>
+        <ng-template matStepLabel>Vehicule et Degats Materiels</ng-template>
+        <div class="cards">
+            <mat-card class="vehicule"  >
+                <mat-card-header>
+                    <mat-card-title>Vehicule Informations</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <div>
+                        <mat-form-field class="example-full-width" appearance="fill">
+                            <mat-label>Number</mat-label>
+                            <input type="text"
+                                placeholder="Pick one"
+                                aria-label="Number"
+                                matInput
+                                formControlName="carBrand"
+                                [matAutocomplete]="auto">
+                            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                                <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                                    {{option}}
+                                </mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+                        <mat-form-field appearance="fill">
+                            <mat-label>Choose an option</mat-label>
+                            <mat-select formControlName="carType">
+                                <mat-option value="CUV">Voiture CUV</mat-option>
+                                <mat-option value="SUV" >SUV</mat-option>
+                                <mat-option value="VAN" >Camionette</mat-option>
+                                <mat-option value="camion">Camion</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div> 
+                        <mat-form-field>
+                            <mat-label>Série</mat-label>
+                            <input matInput formControlName="carPlate" type="text" >
+                        </mat-form-field>
+                    
+                    <mat-form-field>
+                        <mat-label>Direction</mat-label>
+                        <input formControlName="carDirection" matInput type="text" >
                     </mat-form-field>
+                </mat-card-content>
+            </mat-card>
+            <mat-card class="degats" >
+                <mat-card-header>
+                    <mat-card-title>Degats Materiels</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
                     <mat-form-field appearance="fill">
-                        <mat-label>Choose an option</mat-label>
-                        <mat-select>
-                            <mat-option value="CUV">Voiture CUV</mat-option>
-                            <mat-option value="SUV" >SUV</mat-option>
-                            <mat-option value="VAN" >Camionette</mat-option>
-                            <mat-option value="camion">Camion</mat-option>
+                        <mat-label>Point de Choc Initial</mat-label>
+                        <mat-select formControlName="apperantDamage" multiple>
+                            <mat-select-trigger>
+                                {{vehicule.controls['apperantDamage'].value ? vehicule.controls['apperantDamage'].value.join(', ') : ''}}
+                                <span *ngIf="vehicule.controls['apperantDamage'].value?.length > 1" class="example-additional-selection">
+                                (+{{vehicule.controls['apperantDamage'].value.length - 1}} {{vehicule.controls['apperantDamage'].value.length === 2 ? 'other' : 'others'}})
+                                </span>
+                            </mat-select-trigger>
+                        <mat-option *ngFor="let side of sides" [value]="side">{{side}}</mat-option>
                         </mat-select>
                     </mat-form-field>
-                </div>    
+
                     <mat-form-field>
-                        <mat-label>Série</mat-label>
-                        <input matInput formControlName="serie" type="text" >
+                        <mat-label>aze</mat-label>
+                        <textarea type="text" matInput></textarea>
                     </mat-form-field>
-                <mat-form-field>
-                    <mat-label>Venant de </mat-label>
-                    <input formControlName="deb" matInput type="text" >
-                </mat-form-field>
-                <mat-form-field>
-                    <mat-label>Allant Vers</mat-label>
-                    <input formControlName="fin" matInput type="text" >
-                </mat-form-field>
-            </mat-card-content>
-        </mat-card>
+                </mat-card-content>
+            </mat-card>
+
+            <mat-card class="circum">
+                <mat-card-header>
+                    <mat-card-title>Circonstances</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <mat-checkbox formControlName="enStationnement">En stationnement</mat-checkbox>
+                    <mat-checkbox formControlName="quittaitStationnement">Quittait le stationnement</mat-checkbox>
+                    <mat-checkbox formControlName="prenaitStationnement">Prenait le stationnement</mat-checkbox>
+                    <mat-checkbox formControlName="sortaitParking">Sortait d'un parking</mat-checkbox>
+                    <mat-checkbox formControlName="engageaitParking">S'engageait dans un parking</mat-checkbox>
+                    <mat-checkbox formControlName="arretCirculation">Arrêté sur la voie de circulation</mat-checkbox>
+                    <mat-checkbox formControlName="frottementSansChangement">Frottement sans changement de direction</mat-checkbox>
+                    <mat-checkbox formControlName="heurtaitArriere">Heurtait par l'arrière</mat-checkbox>
+                    <mat-checkbox formControlName="roulaitMemeSens">Roulait dans le même sens</mat-checkbox>
+                    <mat-checkbox formControlName="changeaitDeFile">Changeait de file</mat-checkbox>
+                    <mat-checkbox formControlName="viraitDroite">Virait à droite</mat-checkbox>
+                    <mat-checkbox formControlName="viraitGauche">Virait à gauche</mat-checkbox>
+                    <mat-checkbox formControlName="reculait">Reculait</mat-checkbox>
+                    <mat-checkbox formControlName="empietaitVoieInverse">Empiétait sur la voie inverse</mat-checkbox>
+                    <mat-checkbox formControlName="venaitDeDroite">Venait de droite</mat-checkbox>
+                    <mat-checkbox formControlName="nonRespectPriorite">Non-respect de la priorité</mat-checkbox>
+                    <mat-checkbox formControlName="obstacleNonMobile">Obstacle non-mobile</mat-checkbox>                      
+                </mat-card-content>         
+            </mat-card> 
+
+        </div>
         <div>
             <button mat-button matStepperPrevious>Back</button>
             <button mat-button matStepperNext>Next</button>
         </div>
         </form>
+    </mat-step> 
+
+    <mat-step [stepControl]="signature">
+        <div class="assureeConducteur">
+            <form  [formGroup]="signature">
+            <ng-template matStepLabel>Croquis Et Signature</ng-template>
+            <div class="canvas-container">
+                <div class="canvas-wrapper">
+                    <mat-card class="croquis">
+                        <mat-card-header>
+                            <mat-card-title>Croquis</mat-card-title>
+                            <mat-card-content>
+                                <canvas #canvas1 ></canvas>
+                                <div>
+                                    <button mat-raised-button color="warn" (click)="erase1()">Suprimer</button>
+                                    <mat-error class="error" *ngIf="!validateCanvas1()">Croquis champ obligatoire</mat-error>
+                                    <button color="primary" mat-raised-button (click)="sendPaintedCanvas1()" [disabled]="!validateCanvas1()">Envoyer Croquis</button>
+                                </div>
+                            </mat-card-content>
+                        </mat-card-header>
+                    </mat-card>
+                </div>
+                <div class="canvas-wrapper">
+                    <mat-card class="signature">
+                        <mat-card-header>
+                            <mat-card-title>Signature</mat-card-title>
+                            <mat-card-content>
+                                <canvas #canvas2 ></canvas>
+                                <div>
+                                    <button mat-raised-button color="warn" (click)="erase2()">Suprimer</button>
+                                    <mat-error class="error" *ngIf="!validateCanvas2()">Votre signature est obligatoire</mat-error>
+                                    <button color="primary" mat-raised-button (click)="sendPaintedCanvas2()" [disabled]="!validateCanvas2()">Envoyer Signature</button>
+                                </div>
+                            </mat-card-content>
+                        </mat-card-header>
+                    </mat-card>
+                </div>
+            </div>
+            <div>
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-button matStepperNext [disabled]="!validateCanvas1() || !validateCanvas2() " >Next</button>
+            </div>
+            </form>
+        </div>
     </mat-step>
-
-
 
 
     <mat-step>
@@ -234,3 +312,4 @@
 
 
             
+ 

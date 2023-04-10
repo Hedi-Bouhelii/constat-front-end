@@ -10,7 +10,6 @@ import { BoardModeratorComponent } from './board-moderator/board-moderator.compo
 import { BoardAdminComponent } from './board-admin/board-admin.component';
 import {HistoricConstatComponent} from './historic-constat/historic-constat.component'
 import {ConstatFormComponent} from './constat-form/constat-form.component'
-
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
@@ -22,7 +21,6 @@ const routes: Routes = [
   { path : 'constat', component: ConstatFormComponent},
   { path : 'historic', component: HistoricConstatComponent},
   { path: '', redirectTo: 'home', pathMatch: 'full' }
-  
 ];
 
 @NgModule({

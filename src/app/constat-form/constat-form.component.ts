@@ -1,10 +1,11 @@
-import { Component,ViewChild  } from '@angular/core';
+import { Component,ViewChild,ElementRef  } from '@angular/core';
 import {Form, FormBuilder , FormGroup, Validators} from '@angular/forms';
 import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
 import { MatExpansionPanel } from '@angular/material/expansion';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import { AuthService } from '../_services/auth.service';
+import { MatCheckboxChange } from '@angular/material/checkbox';
 
 
 
@@ -35,13 +36,14 @@ export class ConstatFormComponent {
   Optional:FormGroup |any
   assureeConducteur:FormGroup |any
   vehicule :FormGroup |any
+  circumstances :FormGroup |any
+  signature :FormGroup |any
   driverIsInsured:boolean= false
   isExpansionPanelOpen = false;
   isLienar:boolean =true ;
   isButtonDisabled: boolean = true;
- 
-
-
+  sides: string[] = ['Garde-boue avant', 'Garde-boue arrière', 'Cotes Conducteur', 'Cotes passagers'];
+  
   toggleExpansion() {
     this.isExpansionPanelOpen = !this.isExpansionPanelOpen;
   }    
@@ -53,88 +55,121 @@ export class ConstatFormComponent {
     let formData = {
       accident: this.Accident.value,
       optional: this.Optional.value,
-      assureeConducteur: this.assureeConducteur.value
+      assureeConducteur: this.assureeConducteur.value,
+      selectedValues : this.vehicule.value,
+      
     };
-    this.authService.registerConstat(formData.accident,formData.assureeConducteur,formData.optional ).subscribe({
-      next: data => {
-        console.log(data);
-        this.isSuccessful = true;
-        this.isSignUpFailed = false;
-      },
-      error: err => {
-        this.errorMessage = err.error.message;
-        this.isSignUpFailed = true;
+    
+    console.log(this.Accident.value,this.Optional.value,this.assureeConducteur.value,this.vehicule.value);
+
+    
+
+    // this.authService.registerConstat(formData).subscribe({
+    //   next: data => {
+    //     console.log(data);
+    //     this.isSuccessful = true;
+    //     this.isSignUpFailed = false;
+    //   },
+    //   error: err => {
+    //     this.errorMessage = err.error.message;
+    //     this.isSignUpFailed = true;
+    //   }
+    // });
       }
-    });
-      }
+      
+
       
   constructor(private _formBuilder: FormBuilder,private authService: AuthService) {
     this.Accident = this._formBuilder.group({
       date: ['', Validators.required],
-      lieu: ['', Validators.required],
-      Blessure:['',Validators.required],
-      Degats: ['',Validators.required]
+      place: ['', Validators.required],
+      injuries:['',Validators.required],
+      materialDamage: ['',Validators.required]
     });
     this.Optional = this._formBuilder.group({
-    nom: ['', Validators.required],
-    prenom: ['', Validators.required],
-    age:['',Validators.required],
-    adrs: ['',Validators.required]
+      witnessFullName: ['', Validators.required],
+      witnessAddress:['',Validators.required],
+      witnessPhone: ['',Validators.required]
     })
     this.assureeConducteur = this._formBuilder.group({
-        nom: ['', Validators.required],
-        prenom: ['', Validators.required],
-        tel:['',Validators.required],
-        adr: ['',Validators.required],
+        insuredLastName: ['', Validators.required],
+        insuredFirstName: ['', Validators.required],
+        insuredPhone:['',Validators.required],
+        insuredAddress: ['',Validators.required],
+        insuredLicenceNumber :[{ value: "", disabled: true }, Validators.required],
+        insuredLicenceDate :[{ value: "", disabled: true }, Validators.required],
+
         driverIsInsured: [true] ,
-        
-        numPA :[{ value: "", disabled: true }, Validators.required],
-        datePA :[{ value: "", disabled: true }, Validators.required],
-        nomCon:[{ value: "", disabled: false }, Validators.required],
-        preCon:[{ value: "", disabled: false }, Validators.required],
-        adrCon:[{ value: "", disabled: false }, Validators.required],
-        telCon:[{ value: "", disabled: false }, Validators.required],
-        numPC :[{ value: "", disabled: false }, Validators.required],
-        datePC :[{ value: "", disabled: false }, Validators.required]
+
+        driverLastName:[{ value: "", disabled: false }, Validators.required],
+        driverFirstName:[{ value: "", disabled: false }, Validators.required],
+        driverAddress:[{ value: "", disabled: false }, Validators.required],
+        licenceNumber :[{ value: "", disabled: false }, Validators.required],
+        licenceDate :[{ value: "", disabled: false }, Validators.required]
         
       });  
       this.vehicule = this._formBuilder.group({
-        marque: ['', Validators.required],
-        serie:['',Validators.required],
-        deb:['',Validators.required],
-        fin:['',Validators.required]
+        carBrand: ['', Validators.required],
+        carPlate:['',Validators.required],
+        carType:['',Validators.required],
+        carDirection:['',Validators.required],
+        apperantDamage:['',Validators.required],
+        enStationnement: false,
+        quittaitStationnement: false,
+        prenaitStationnement: false,
+        sortaitParking: false,
+        engageaitParking: false,
+        arretCirculation: false,
+        frottementSansChangement: false,
+        heurtaitArriere: false,
+        roulaitMemeSens: false,
+        changeaitDeFile: false,
+        viraitDroite: false,
+        viraitGauche: false,
+        reculait: false,
+        empietaitVoieInverse: false,
+        venaitDeDroite: false,
+        nonRespectPriorite: false,
+        obstacleNonMobile: false,
         
-      })
+      });
+      
   }
+  
   disableField(checked :any) {
     Object.keys(this.f).forEach(key => {
       if (checked) {
-        this.f['numPA'].enable();
-        this.f['datePA'].enable();
-        this.f['nomCon'].disable();
-        this.f['preCon'].disable();
-        this.f['adrCon'].disable();
-        this.f['telCon'].disable();
-        this.f['numPC'].disable();
-        this.f['datePC'].disable();
+        this.f['insuredLicenceNumber'].enable();
+        this.f['insuredLicenceDate'].enable();
+        this.f['driverLastName'].disable();
+        this.f['driverFirstName'].disable();
+        this.f['driverAddress'].disable();
+        this.f['licenceNumber'].disable();
+        this.f['licenceDate'].disable();
 
       } else {
-        this.f['numPA'].disable();
-        this.f['datePA'].disable();
-        this.f['nomCon'].enable();
-        this.f['preCon'].enable();
-        this.f['adrCon'].enable();
-        this.f['telCon'].enable();
-        this.f['numPC'].enable();
-        this.f['datePC'].enable();
+        this.f['insuredLicenceNumber'].disable();
+        this.f['insuredLicenceDate'].disable();
+        this.f['driverLastName'].enable();
+        this.f['driverFirstName'].enable();
+        this.f['driverAddress'].enable();
+        this.f['licenceNumber'].enable();
+        this.f['licenceDate'].enable();
       }
     });
+  }
+  selectedValues: string[] = [];
+
+  onCheckboxChange(event: any) {
+    const checkedValues = event.source.value; // Get the value of the checkbox that was changed
+    console.log(checkedValues); // Log the checked values to the console
+    // You can now send the checkedValues to the backend or manipulate them as needed
   }
   get f() {
     return this.assureeConducteur.controls;
   }
   ngOnInit() {
-    this.filteredOptions = this.vehicule.controls['marque'].valueChanges.pipe(
+    this.filteredOptions = this.vehicule.controls['carBrand'].valueChanges.pipe(
       startWith(''),
       map(value => this._filter(value || '')),
     );
@@ -144,4 +179,143 @@ export class ConstatFormComponent {
 
     return this.options.filter(option => option.toLowerCase().includes(filterValue));
   }
+  
+
+  @ViewChild('canvas1', { static: true })
+  canvas1!: ElementRef<any>;
+  @ViewChild('canvas2', { static: true })
+  canvas2!: ElementRef<any>;
+
+  isCanvasPainted1 = false;
+  isCanvasPainted2 = false;
+
+  ngAfterViewInit() {
+    const canvas1 = this.canvas1.nativeElement;
+    const ctx1 = canvas1.getContext('2d');
+    let isDrawing1 = false;
+    let lastX1 = 0;
+    let lastY1 = 0;
+
+    canvas1.addEventListener('mousedown', (event: any) => {
+      if (event.shiftKey) { // Use shift key to activate eraser
+        isDrawing1 = false;
+        const eraseX = event.offsetX - 10;
+        const eraseY = event.offsetY - 10;
+        const eraseWidth = 20;
+        const eraseHeight = 20;
+        ctx1.clearRect(eraseX, eraseY, eraseWidth, eraseHeight);
+      } else {
+        isDrawing1 = true;
+        lastX1 = event.offsetX;
+        lastY1 = event.offsetY;
+      }
+    });
+
+    canvas1.addEventListener('mouseup', () => {
+      isDrawing1 = false;
+      this.isCanvasPainted1 = true; // Set the flag to true
+    });
+
+    canvas1.addEventListener('mousemove', (event: any) => {
+      if (isDrawing1) {
+        ctx1.beginPath();
+        ctx1.moveTo(lastX1, lastY1);
+        ctx1.lineTo(event.offsetX, event.offsetY);
+        ctx1.stroke();
+        lastX1 = event.offsetX;
+        lastY1 = event.offsetY;
+      }
+    });
+
+    canvas1.addEventListener('mouseup', () => {
+      isDrawing1 = false;
+    });
+
+    const canvas2 = this.canvas2.nativeElement;
+    const ctx2 = canvas2.getContext('2d');
+    let isDrawing2 = false;
+    let lastX2 = 0;
+    let lastY2 = 0;
+
+    canvas2.addEventListener('mousedown', (event: any) => {
+      if (event.shiftKey) { // Use shift key to activate eraser
+        isDrawing2 = false;
+        const eraseX = event.offsetX - 10;
+        const eraseY = event.offsetY - 10;
+        const eraseWidth = 20;
+        const eraseHeight = 20;
+        ctx2.clearRect(eraseX, eraseY, eraseWidth, eraseHeight);
+      } else {
+        isDrawing2 = true;
+        lastX2 = event.offsetX;
+        lastY2 = event.offsetY;
+      }
+    });
+
+    canvas2.addEventListener('mouseup', () => {
+      isDrawing2 = false;
+      this.isCanvasPainted2 = true; // Set the flag to true
+    });
+
+    canvas2.addEventListener('mousemove', (event: any) => {
+      if (isDrawing2) {
+        ctx2.beginPath();
+        ctx2.moveTo(lastX2, lastY2);
+        ctx2.lineTo(event.offsetX, event.offsetY);
+        ctx2.stroke();
+        lastX2 = event.offsetX;
+        lastY2 = event.offsetY;
+      }
+    });
+
+    canvas2.addEventListener('mouseup', () => {
+      isDrawing2 = false;
+    });
+  }
+  erase1() {
+    const canvas1 = this.canvas1.nativeElement;
+    const ctx1 = canvas1.getContext('2d');
+    ctx1.clearRect(0, 0, canvas1.width, canvas1.height); // clear the entire canvas
+    this.isCanvasPainted1 = false; // set the flag to false
+  }
+  erase2() {
+    const canvas2 = this.canvas2.nativeElement;
+    const ctx2 = canvas2.getContext('2d');
+    ctx2.clearRect(0, 0, canvas2.width, canvas2.height);
+    this.isCanvasPainted2 = false; // Set the flag to false
+  }
+  sendPaintedCanvas1() {
+    const canvas = this.canvas1.nativeElement;
+    const paintedImage = canvas.toDataURL();
+    console.log(paintedImage);
+  }
+  sendPaintedCanvas2() {
+    const canvas = this.canvas2.nativeElement;
+    const paintedImage = canvas.toDataURL();
+    console.log(paintedImage);
+  }
+  validateCanvas2(): boolean {
+    const isValid = this.isCanvasPainted2;
+    if (isValid) {
+      console.log('Canvas is valid.');
+    } else {
+      console.log('Canvas is not valid.');
+    }
+    return isValid;
+  }
+  validateCanvas1(): boolean {
+    const isValid = this.isCanvasPainted1;
+    if (isValid) {
+      console.log('Canvas is valid.');
+    } else {
+      console.log('Canvas is not valid.');
+    }
+    return isValid;
+  }
+
+
+
+
+
+
 }
