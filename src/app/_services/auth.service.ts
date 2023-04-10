@@ -40,11 +40,11 @@ export class AuthService {
       httpOptions
     );
   }
-  registerConstat(formData: any): Observable<any> {
+  registerConstat(formData: any,convertedDate:string): Observable<any> {
     return this.http.post(
       AUTH_API + 'register',
       {
-      date: formData.accident.date,
+      date: convertedDate,
       lieu: formData.accident.lieu,
       blessure: formData.accident.Blessure,
       degats: formData.accident.Degats,
@@ -64,7 +64,7 @@ export class AuthService {
       optionalPrenom: formData.optional.prenom,
       optionalAge: formData.optional.age,
       optionalAdr: formData.optional.adrs,
-      // driverIsInsured: formData.assureeConducteur.driverIsInsured,
+      
       numPA: formData.assureeConducteur.numPA,
       datePA: formData.assureeConducteur.datePA,
       numPC: formData.assureeConducteur.numPC,

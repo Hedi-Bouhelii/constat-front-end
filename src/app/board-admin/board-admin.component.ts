@@ -1,5 +1,7 @@
 import { Component, OnInit, ValueProvider } from '@angular/core';
 import { UserService } from '../_services/user.service';
+import { ConstatPDFComponent} from '../constat-pdf/constat-pdf.component';
+import { MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-board-admin',
@@ -9,8 +11,14 @@ import { UserService } from '../_services/user.service';
 export class BoardAdminComponent implements OnInit {
   content?: string;
 
-  constructor(private userService: UserService) { }
-
+  constructor(private userService: UserService,private dialog: MatDialog) { }
+  
+  openDialog(): void {
+    const dialogRef = this.dialog.open(ConstatPDFComponent);
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
   ngOnInit(): void {
     this.userService.getAdminBoard().subscribe({
       next: data => {

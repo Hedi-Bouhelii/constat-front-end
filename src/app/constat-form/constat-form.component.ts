@@ -33,11 +33,7 @@ export class ConstatFormComponent {
   'volkswagen Utilitaires','Wallys'];
   filteredOptions?: Observable<any[]>;
   Accident:FormGroup |any
-  Optional:FormGroup |any
-  assureeConducteur:FormGroup |any
-  vehicule :FormGroup |any
-  circumstances :FormGroup |any
-  signature :FormGroup |any
+  
   driverIsInsured:boolean= false
   isExpansionPanelOpen = false;
   isLienar:boolean =true ;
@@ -47,24 +43,34 @@ export class ConstatFormComponent {
   toggleExpansion() {
     this.isExpansionPanelOpen = !this.isExpansionPanelOpen;
   }    
+  convertedDate: string |any;
+  convertDate(value: string) {
+    const parts = value.split('/');
+    const year = parts[2];
+    const month = parts[1];
+    const day = parts[0];
+    const convertedDate = `${year}-${month}-${day}`;
+   
+    return convertedDate;
+  }
   isDis:boolean =true
   isSuccessful = false;
   isSignUpFailed = false;
   errorMessage = '';
   onSubmit(): void {
+    const dateInput = document.getElementById('date-input') as HTMLInputElement;
+    const dateValue = dateInput.value;
+    const convertedDate = this.convertDate(dateValue);
     let formData = {
       accident: this.Accident.value,
-      optional: this.Optional.value,
-      assureeConducteur: this.assureeConducteur.value,
-      selectedValues : this.vehicule.value,
       
     };
     
-    console.log(this.Accident.value,this.Optional.value,this.assureeConducteur.value,this.vehicule.value);
+    console.log(this.Accident.value);
 
     
 
-    // this.authService.registerConstat(formData).subscribe({
+    // this.authService.registerConstat(formData,convertedDate).subscribe({
     //   next: data => {
     //     console.log(data);
     //     this.isSuccessful = true;
@@ -80,18 +86,17 @@ export class ConstatFormComponent {
 
       
   constructor(private _formBuilder: FormBuilder,private authService: AuthService) {
+    
     this.Accident = this._formBuilder.group({
       date: ['', Validators.required],
       place: ['', Validators.required],
       injuries:['',Validators.required],
-      materialDamage: ['',Validators.required]
-    });
-    this.Optional = this._formBuilder.group({
+      materialDamage: ['',Validators.required],
+    
       witnessFullName: ['', Validators.required],
       witnessAddress:['',Validators.required],
-      witnessPhone: ['',Validators.required]
-    })
-    this.assureeConducteur = this._formBuilder.group({
+      witnessPhone: ['',Validators.required],
+   
         insuredLastName: ['', Validators.required],
         insuredFirstName: ['', Validators.required],
         insuredPhone:['',Validators.required],
@@ -105,10 +110,9 @@ export class ConstatFormComponent {
         driverFirstName:[{ value: "", disabled: false }, Validators.required],
         driverAddress:[{ value: "", disabled: false }, Validators.required],
         licenceNumber :[{ value: "", disabled: false }, Validators.required],
-        licenceDate :[{ value: "", disabled: false }, Validators.required]
+        licenceDate :[{ value: "", disabled: false }, Validators.required],
         
-      });  
-      this.vehicule = this._formBuilder.group({
+     
         carBrand: ['', Validators.required],
         carPlate:['',Validators.required],
         carType:['',Validators.required],
@@ -166,10 +170,10 @@ export class ConstatFormComponent {
     // You can now send the checkedValues to the backend or manipulate them as needed
   }
   get f() {
-    return this.assureeConducteur.controls;
+    return this.Accident.controls;
   }
   ngOnInit() {
-    this.filteredOptions = this.vehicule.controls['carBrand'].valueChanges.pipe(
+    this.filteredOptions = this.Accident.controls['carBrand'].valueChanges.pipe(
       startWith(''),
       map(value => this._filter(value || '')),
     );
